@@ -1,0 +1,49 @@
+@startuml CriarCatalogoMD
+
+class Colaborador {
+
+}
+
+
+
+package "Servico" <<aggregate>> #DDDDDD {
+
+    class Servico <<entity>> <<root>> {
+        CodigoUnico codigoUnico
+        Titulo Titulo
+        Icone icone
+        Descricao descricaoBreve
+        Descricao descricaoCompleta
+        Keyword keyword
+    }
+
+    enum EstadoEspecificacao {
+
+    }
+
+    Servico "1" --> "1" EstadoEspecificacao
+}
+
+
+package "Catalogo" <<aggregate>> #DDDDDD {
+
+    class Catalogo <<entity>> <<root>> {
+        Identificador identificador
+        Titulo Titulo
+        Icone icone
+        Descricao descricaoBreve
+        Descricao descricaoCompleta
+    }
+
+    class CriterioAcesso <<value object>>{
+
+    }
+
+    Servico "1..*" o-- "1" Catalogo : "contido em"    
+    Catalogo "1" --> "*" Equipa : "acedido por"
+    Catalogo "1" --> "1..*" CriterioAcesso : "controla acesso das equipas"    
+    Catalogo "1" --> "1" Colaborador : "tem como responsavel"
+}
+
+
+@enduml

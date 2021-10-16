@@ -1,0 +1,67 @@
+@startuml SolicitacaoServico
+
+
+class Servico {
+
+}
+
+
+class Colaborador {
+
+}
+
+
+
+
+
+package "Pedido" <<aggregate>> #DDDDDD {
+
+    class Pedido <<entity>> <<root>> {
+        IdentificadorUnico identificadorUnico
+        Data DataLimiteExecucao
+        FicheiroAnexado ficheiroAnexado
+        DadosFormulario dadosFormulario
+    }
+
+    class DadosFormulario <<value object>> {
+
+    }
+
+    class DadosAtributoFormulario <<value object>> {
+
+    }
+
+    enum UrgenciaPedido {
+
+    }
+
+    
+    enum EstadoPedido {
+        SUBMETIDO
+        EMAPROVACAO
+        APROVADO 
+        REJEITADO
+        EMRESOLUCAO
+        CONCLUIDO
+    }
+
+    
+    Pedido "1" --> "1" UrgenciaPedido : "categorizado por"
+    Pedido "1" --> "1" EstadoPedido : "apresenta"
+    Pedido "1" --> "1" Servico : "pretende ver executado"
+    Pedido "1" -left-> "1" DadosFormulario : "detalhado em"
+    Pedido "1" --> "0..1" Feedback : "avaliar resolução de"
+    Colaborador "1" --> "0..*" Pedido : "solicita"    
+    DadosFormulario "1" --> "1" DadosAtributoFormulario : "detalhado em"
+    
+}
+
+DadosFormulario "1" .-left-> "1" Formulario : "validado em"
+
+package "Feedback" <<aggregate>> #DDDDDD {
+    class Feedback <<entity>> <<root>> {
+
+    }
+}
+
+@enduml

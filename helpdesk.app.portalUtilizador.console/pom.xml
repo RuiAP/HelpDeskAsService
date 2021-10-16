@@ -1,0 +1,67 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <groupId>com.ruipeixoto</groupId>
+        <artifactId>helpdesk</artifactId>
+        <version>1.3.0-SNAPSHOT</version>
+    </parent>
+    
+    <artifactId>helpdesk.app.portalUtilizador.console</artifactId>
+    <packaging>jar</packaging>
+
+    <name>helpdesk.app.portalUtilizador.console</name>
+
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+    </properties>
+
+    <!-- TODO helpdesk.app.common.console,  portalUtilizador & ServicosERH belong to the UI layer, and should not have any dependencies on the domain-->
+    <dependencies>
+        <!-- ==== only for development purposes (drop-and-create db + run bootstrap at startup) ===== -->
+        <!-- Allows transient dependencies to the domain. Careful with imports used -->
+        <dependency>
+            <groupId>com.ruipeixoto</groupId>
+            <artifactId>helpdesk.app.bootstrap</artifactId>
+            <version>1.3.0-SNAPSHOT</version>
+            <scope>compile</scope>
+<!--            These exclusions prevent transient dependencies to core, persistence, interpretador, etc-->
+<!--            <exclusions>-->
+<!--                <exclusion>-->
+<!--                    <groupId>*</groupId>-->
+<!--                    <artifactId>*</artifactId>-->
+<!--                </exclusion>-->
+<!--            </exclusions>-->
+        </dependency>
+        <!--===========================================================================================-->
+        <dependency>
+            <groupId>com.ruipeixoto</groupId>
+            <artifactId>helpdesk.app.common.console</artifactId>
+            <version>${project.parent.version}</version>
+            <!-- TODO REMOVE helpdesk.core dependency present on helpdesk.app.common.console POM -->
+        </dependency>
+
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+            <exclusions>
+                <exclusion>
+                    <groupId>*</groupId>
+                    <artifactId>*</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+            </plugin>
+        </plugins>
+    </build>
+</project>

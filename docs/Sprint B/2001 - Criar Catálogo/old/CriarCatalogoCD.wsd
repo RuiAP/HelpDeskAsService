@@ -1,0 +1,87 @@
+@startuml CriarCatalogoCD
+
+class CriarCatalogoUI{
+
+}
+
+CriarCatalogoUI-->CriarCatalogoController
+CriarCatalogoUI-->ListarServicosController
+CriarCatalogoUI-->ListarEquipasController
+CriarCatalogoUI-->ListarColaboradoresController
+
+class CriarCatalogoController{
+}
+CriarCatalogoController-->CriarCatalogoService
+CriarCatalogoController-->CatalogoBuilder
+CatalogoBuilder-->Catalogo
+
+class CatalogoBuilder{
+    
+}
+
+class CriarCatalogoService{
+
+}
+CriarCatalogoService-->CatalogosRepository
+CriarCatalogoService-->Catalogo
+
+class CatalogosRepository{
+
+}
+CatalogosRepository<|-- Repository
+
+class ListarServicosController{
+}
+ListarServicosController-->ListarServicosService
+class ListarServicosService{
+
+}
+ListarServicosService-->ServicosRepository
+ListarServicosService-->Servico
+class ServicosRepository{
+
+}
+ServicosRepository<|-- Repository
+
+class ListarEquipasController{
+}
+ListarEquipasController-->ListarEquipasService
+class ListarEquipasService{
+
+}
+ListarEquipasService-->EquipasRepository
+ListarEquipasService-->Equipa
+class EquipasRepository{
+    
+}
+EquipasRepository<|-- Repository
+
+class ListarColaboradoresController{
+}
+ListarColaboradoresController-->ListarColaboradoresService
+class ListarColaboradoresService{
+
+}
+ListarColaboradoresService-->ColaboradoresRepository
+ListarColaboradoresService-->Colaborador
+class ColaboradoresRepository{
+    
+}
+ColaboradoresRepository<|-- Repository
+
+interface Repository{
+
+}
+
+class Colaborador {
+
+}
+
+class Equipa {
+
+}
+
+
+
+
+@enduml

@@ -1,0 +1,15 @@
+title ListarEquipas
+
+ListarEquipasController->+ListarEquipasService : ListarEquipas()
+ListarEquipasService ->+ PersistenceContext: repositories()
+PersistenceContext->AppSettings : instance()
+PersistenceContext->+AppSettings : GetRepositoryFactory()
+AppSettings->+RepositoryFactory : create()
+RepositoryFactory-->-AppSettings :
+AppSettings-->-PersistenceContext :
+PersistenceContext-->-ListarEquipasService :
+ListarEquipasService ->+ RepositoryFactory : Equipas()
+RepositoryFactory -> EquipasRepository : create()
+ListarEquipasService ->+ EquipasRepository : ListarEquipasPorEquipa()
+EquipasRepository-->-ListarEquipasService :
+ListarEquipasService-->-ListarEquipasController :

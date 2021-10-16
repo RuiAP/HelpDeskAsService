@@ -1,0 +1,15 @@
+title ListarServicos
+
+ListarServicosController->+ListarServicosService : ListarServicos()
+ListarServicosService ->+ PersistenceContext: repositories()
+PersistenceContext->AppSettings : instance()
+PersistenceContext->+AppSettings : GetRepositoryFactory()
+AppSettings->+RepositoryFactory : create()
+RepositoryFactory-->-AppSettings :
+AppSettings-->-PersistenceContext :
+PersistenceContext-->-ListarServicosService :
+ListarServicosService ->+ RepositoryFactory : Servicos()
+RepositoryFactory -> ServicosRepository : create()
+ListarServicosService ->+ ServicosRepository : ListarServicosPorEquipa()
+ServicosRepository-->-ListarServicosService :
+ListarServicosService-->-ListarServicosController :

@@ -1,0 +1,84 @@
+@startuml
+
+
+package "Utilizador" <<aggregate>> #DDDDDD {
+    class Utilizador <<entity>> <<root>> {
+
+    }   
+}
+
+
+package "Colaborador" <<aggregate>> #DDDDDD {
+
+    class Colaborador <<entity>> <<root>> {
+        Nome nome
+        Nif nif
+        Nib nib
+        EstadoCivil estadoCivil
+        Morada localResidencia
+        ContactoTelefonico contactoTelefonico
+        Email emailInstitucional
+        Password password
+        Data dataNascimento
+        HabilitacaoLiteraria habilitacaoLiteraria
+        NrMecanografico nrMecanografico
+    }    
+
+    Colaborador "0..*" --> "1" Funcao : "desempenha"
+    Colaborador "0..1" --> "1..*" Colaborador : "responsavel de"
+}
+
+package "Funcao" <<aggregate>> #DDDDDD {
+
+    class Funcao <<entity>> <<root>>{
+        Designacao designacao
+    }
+}
+
+    Utilizador <-- Colaborador : "atua como"
+
+package "Tarefa" <<aggregate>> #DDDDDD {
+
+    class Tarefa <<entity>> <<root>> {
+        Data dataLimiteConclusao
+        Prioridade prioridade
+    }
+
+    class TarefaManual {
+
+    }
+
+    Tarefa <|-- TarefaManual
+        Tarefa "1" --> "1" Colaborador : "é realizada/delegada por"
+}
+
+class ServicoAssignacao <<service>> {
+        
+}
+
+    Assignacao <.-- ServicoAssignacao : "resulta em"
+
+
+
+package Assignacao <<aggregate>> #DDDDDD {
+
+    class Assignacao <<entity>><<root>> {
+        
+    }
+
+    class AssignacaoManual <<entity>> {
+        Justificacao justificacao
+    }
+
+    class AssignacaoAutomatica <<entity>> {
+        
+    }
+
+Assignacao <|-- AssignacaoManual
+Assignacao <|-- AssignacaoAutomatica
+
+}
+
+    Tarefa "1" --.> "1" ServicoAssignacao : "Adota"
+
+@enduml

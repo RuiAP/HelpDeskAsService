@@ -1,0 +1,28 @@
+	_________
+
+	DESIGN
+	_________
+
+	* Utilizar a estrutura base standard da aplicação baseada em camadas
+
+
+   	Classes do domínio:  RegistarTipoEquipa
+   	Controlador: RegistarTipoEquipaController
+   	Repository: RegistarTipoEquipaRepository
+
+
+	Diagrama de Sequência - websequencediagrams.com source
+
+	title RegistarTipoEquipa
+
+	User->LoginUI : DoLogin()
+	User->RegistarTipoEquipaUI : Show()
+	RegistarTipoEquipaUI-> RegistarTipoEquipaController : create()
+	RegistarTipoEquipaController -> PersistenceContext : repositories()
+	PersistenceContext-> RepositoryFactory : create()
+	RepositoryFactory-> TipoEquipaRepository : create()
+	PersistenceContext--> RegistarTipoEquipaController : TipoEquipaRepository
+	RegistarTipoEquipaUI-> RegistarTipoEquipaUI: doShow()
+	RegistarTipoEquipaUI-> RegistarTipoEquipaController : registarTipoEquipa(codigoUnicoInterno, descricao, cor)
+	RegistarTipoEquipaController -> TipoEquipa :  novoTipoEquipa = create(codigoUnicoInterno, descricao, cor)
+	RegistarTipoEquipaController -> TipoEquipaRepository: gravar(novoTipoEquipa)

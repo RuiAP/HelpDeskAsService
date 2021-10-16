@@ -1,0 +1,61 @@
+@startuml
+
+
+package "SystemUser" <<aggregate>> #DDDDDD {
+    class SystemUser <<entity>> <<root>> {
+
+    }   
+}
+
+
+package "Equipa" <<aggregate>> #DDDDDD {
+    class Equipa <<entity>> <<root>> {
+        CodigoUnico codigoUnico
+        Designacao designacao
+        Responsavel responsavel
+        Acronimo acronimo
+    }
+
+    Equipa "1..*" --> "1" TipoEquipa : "caraterizada por"
+}
+
+package "TipoEquipa" <<aggregate>> #DDDDDD {
+    class TipoEquipa <<entity>> <<root>> {
+        CodigoUnico codigoUnicoInterno
+        Descricao descricao
+        Cor cor 
+    }
+}
+
+package "Colaborador" <<aggregate>> #DDDDDD {
+
+    class Colaborador <<entity>> <<root>> {
+        Nome nome
+        Nif nif
+        Nib nib
+        EstadoCivil estadoCivil
+        Morada localResidencia
+        ContactoTelefonico contactoTelefonico
+        Email emailInstitucional
+        Password password
+        Data dataNascimento
+        HabilitacaoLiteraria habilitacaoLiteraria
+        NrMecanografico nrMecanografico
+    }    
+
+    Colaborador "0..*" --> "1" Funcao : "desempenha"
+    Colaborador "0..1" --> "1..*" Colaborador : "responsável de"
+}
+
+package "Funcao" <<aggregate>> #DDDDDD {
+
+    class Funcao <<entity>> <<root>>{
+        Designacao designacao
+    }
+}
+
+    SystemUser <-- Colaborador : "efetua login como"
+    Equipa "0..*" <-- "1..*" Colaborador : "pertence"
+    Equipa "0..*" --> "1..*" Colaborador : "gerida por"
+
+@enduml

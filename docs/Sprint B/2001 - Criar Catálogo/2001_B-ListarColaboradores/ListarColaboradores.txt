@@ -1,0 +1,15 @@
+title ListarColaboradores
+
+ListarColaboradoresController->+ListarColaboradoresService : listarColaboradores()
+ListarColaboradoresService ->+ PersistenceContext: repositories()
+PersistenceContext->AppSettings : instance()
+PersistenceContext->+AppSettings : GetRepositoryFactory()
+AppSettings->+RepositoryFactory : create()
+RepositoryFactory-->-AppSettings :
+AppSettings-->-PersistenceContext :
+PersistenceContext-->-ListarColaboradoresService :
+ListarColaboradoresService ->+ RepositoryFactory : Colaboradores()
+RepositoryFactory -> ColaboradoresRepository : create()
+ListarColaboradoresService ->+ ColaboradoresRepository : listarColaboradores()
+ColaboradoresRepository-->-ListarColaboradoresService :
+ListarColaboradoresService-->-ListarColaboradoresController :

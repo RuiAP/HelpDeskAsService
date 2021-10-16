@@ -1,0 +1,30 @@
+@startuml
+
+package "Colaborador" <<aggregate>> #DDDDDD {
+
+    class Colaborador <<entity>> <<root>> {
+        Nome nome
+        Nif nif
+        Nib nib
+        EstadoCivil estadoCivil
+        Morada localResidencia
+        ContactoTelefonico contactoTelefonico
+        Email emailInstitucional
+        Password password
+        Data dataNascimento
+        HabilitacaoLiteraria habilitacaoLiteraria
+        NrMecanografico nrMecanografico
+    }    
+
+    Colaborador "0..*" --> "1" Funcao : "desempenha"
+    Colaborador "0..1" --> "1..*" Colaborador : "responsavel de"
+}
+
+package "Funcao" <<aggregate>> #DDDDDD {
+
+    class Funcao <<entity>> <<root>>{
+        Designacao designacao
+    }
+}
+
+@enduml

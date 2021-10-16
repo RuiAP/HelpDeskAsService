@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence version="2.1" xmlns="http://xmlns.jcp.org/xml/ns/persistence">
+  <persistence-unit name="helpdeskAsServicePU">
+<!--<provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>-->
+    <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
+
+    <class>eapli.framework.infrastructure.authz.domain.model.SystemUser</class>
+    <class>eapli.framework.infrastructure.authz.domain.model.Role</class>
+    <class>eapli.framework.infrastructure.authz.domain.model.RoleSet</class>
+    <class>eapli.framework.infrastructure.authz.domain.model.RoleAssignment</class>
+    <class>helpdesk.clientusermanagement.domain.ClientUser</class>
+    <class>helpdesk.clientusermanagement.domain.SignupRequest</class>
+    <class>helpdesk.especificacaoservico.domain.catalogo.Catalogo</class>
+    <class>helpdesk.especificacaoservico.domain.servico.Atividade</class>
+    <class>helpdesk.especificacaoservico.domain.servico.Servico</class>
+    <class>helpdesk.especificacaoservico.domain.servico.Formulario</class>
+    <class>helpdesk.execucaofluxo.domain.tarefas.FormularioPreenchido</class>
+    <class>helpdesk.especificacaoservico.domain.servico.Keyword</class>
+    <class>helpdesk.especificacaoservico.domain.servico.AtributoFormulario</class>
+    <class>helpdesk.estruturaorganica.domain.funcao.Funcao</class>
+    <class>helpdesk.estruturaorganica.domain.colaborador.Colaborador</class>
+    <class>helpdesk.estruturaorganica.domain.colaborador.NrMecanografico</class>
+    <class>helpdesk.estruturaorganica.domain.equipa.Equipa</class>
+    <class>helpdesk.estruturaorganica.domain.tipoEquipa.TipoEquipa</class>
+    <class>helpdesk.solicitacaoservico.domain.pedido.Pedido</class>
+    <class>helpdesk.solicitacaoservico.domain.pedido.AtributoPreenchido</class>
+    <class>helpdesk.solicitacaoservico.domain.pedido.Ficheiro</class>
+    <class>helpdesk.nivelservico.domain.nivelcriticidade.NivelCriticidade</class>
+    <class>helpdesk.execucaofluxo.domain.tarefas.Tarefa</class>
+    <class>helpdesk.execucaofluxo.domain.tarefas.TarefaManual</class>
+    <class>helpdesk.execucaofluxo.domain.tarefas.TarefaAutomatica</class>
+
+    <properties>
+
+
+        <!-- H2 database -->
+<!--      <property name="javax.persistence.jdbc.url" value="jdbc:h2:tcp://localhost/~/helpdesk"/>-->
+<!--      <property name="javax.persistence.jdbc.url" value="jdbc:h2:tcp://vsgate-s2.dei.isep.ipp.pt:10412/~/helpdesk"/>-->
+<!--      <property name="javax.persistence.jdbc.url" value="jdbc:h2:C:\data\base;MV_STORE=FALSE;AUTO_SERVER=true;"/>-->
+<!--      <property name="javax.persistence.jdbc.user" value="a"/>-->
+<!--      <property name="javax.persistence.jdbc.password" value="a"/>-->
+<!--      <property name="javax.persistence.jdbc.driver" value="org.h2.Driver"/>-->
+<!--      <property name="hibernate.dialect" value="org.hibernate.dialect.H2Dialect"/>-->
+
+
+        <!-- PostgresSQL database -->
+        <property name="javax.persistence.jdbc.url" value="jdbc:postgresql://localhost:5432/postgres"/>
+        <property name="javax.persistence.jdbc.user" value="postgres"/>
+        <property name="javax.persistence.jdbc.password" value="adminMaster"/>
+        <property name="javax.persistence.jdbc.driver" value="org.postgresql.Driver"/>
+        <property name="hibernate.dialect" value="org.hibernate.dialect.PostgreSQL10Dialect"/>
+
+
+        <!-- Other Configurations -->
+<!--        <property name="hibernate.id.new_generator_mappings" value="false"/>-->
+<!--        <property name ="hibernate.show_sql" value = "true" />-->
+<!--        <property name="javax.persistence.schema-generation.database.action" value="drop-and-create"/>-->
+        <property name="hibernate.hbm2ddl.auto" value="create-drop"/> <!-- hibernate specific instead of jpa -->
+
+
+      <!-- Hibernate C3PO Connection Pooling -->
+<!--      <property name="hibernate.connection.provider_class" value="org.hibernate.connection.C3P0ConnectionProvider"/>-->
+<!--      <property name="hibernate.c3p0.min_size" value="5" />-->
+<!--      <property name="hibernate.c3p0.max_size" value="20" />-->
+<!--      <property name="hibernate.c3p0.timeout" value="300" />-->
+<!--      <property name="hibernate.c3p0.max_statements" value="50" />-->
+<!--      <property name="hibernate.c3p0.idle_test_period" value="120" />-->
+
+    </properties>
+  </persistence-unit>
+</persistence>

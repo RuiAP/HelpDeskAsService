@@ -1,0 +1,36 @@
+@startuml NivelServico
+
+
+class Catalogo {
+        
+}
+
+class Servico {
+
+}
+
+
+package "NivelCriticidade" #DDDDDD {
+    class NivelCriticidade <<entity>> {
+        Designacao designacao
+        Etiqueta etiqueta
+        EscalaNumerica escalaNumerica
+        Cor cor
+    }
+}
+
+package "ServiceLevelAgreement" #DDDDDD {
+
+    class SLA <<entity>> <<root>> {
+        ObjectivoAprovacao objectivoAprovacao
+        ObjectivoRealizacao objectivoRealizacao
+    }
+
+}
+
+    NivelCriticidade "1" <-- "1" SLA : "carateriza-se por"    
+    SLA "1" <-- "1" Catalogo : "possui"
+    SLA "0..1" <-- "1" Servico : "possui"
+
+
+@enduml

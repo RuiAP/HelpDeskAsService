@@ -1,0 +1,90 @@
+@startuml ExecucaoFluxo
+
+
+package "Tarefa" <<aggregate>> #DDDDDD {
+
+  
+
+    class Tarefa <<entity>> <<root>> {
+        Prioridade prioridade
+    }
+
+ 
+    class HistoricoTarefa <<value object>> {
+        Colaborador colaborador
+        Data dataAlteracao
+        
+    }
+
+    enum EstadoTarefa {
+        PENDENTE
+        ASSIGNADA
+        CONCLUIDA
+    }
+     
+    class Delegacao <<value object>> {
+        Colaborador delega
+        Colaborador delegado
+    Jusitificacao justificacao
+    Data dataDelegacao
+    }
+
+
+    class TarefaManual <<entity>> {
+
+    }
+
+    class TarefaAutomatica <<entity>> {
+
+    }
+
+    class DadosFormulario <<value object>> {
+    }
+
+    class Script <<value object>>{
+    }
+
+     class PossiveisResponsaveis <<value object>> {
+
+    }
+
+    Tarefa "1" -right-> "1..*" HistoricoTarefa      
+    HistoricoTarefa "*" -right-> "1" EstadoTarefa   
+    Tarefa <|-- TarefaManual : ""
+    Tarefa <|-- TarefaAutomatica : ""
+    TarefaManual "1" --> "1" DadosFormulario : "preenche"
+
+}
+
+    TarefaAutomatica "1" --> "1" Script : "executa"
+    Tarefa "1" -left-> "*" Delegacao : "pode aceitar"
+    TarefaManual "1" --> "1" PossiveisResponsaveis : "assignada a"
+    Colaborador  "*" <-left- "1" PossiveisResponsaveis : "possivel assignar a"
+    Equipa "*" <-up- "1" PossiveisResponsaveis  : "possivel assignar a"
+    DadosFormulario --.> Formulario : "validado em"
+
+class Colaborador {
+
+}
+
+
+
+class Pedido {
+}
+
+class ServicoAssignacao <<service>> {
+        
+}
+
+class ServicoAtribuicaoPrioridade <<service>> {
+
+}
+
+
+Pedido "1" <-down- "1" Tarefa : "aprova/realiza"
+Colaborador"1" <-right- "1" TarefaManual : é realizada por
+Tarefa <.-up- ServicoAtribuicaoPrioridade : "atribui prioridade"
+Tarefa <.-up-  ServicoAssignacao : "assigna colaborador"
+
+
+@enduml

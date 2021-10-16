@@ -1,0 +1,57 @@
+@startuml
+
+
+box "Aplicação Portal Utilizador" #LightBlue
+participant PortalUtilizadorClient as client 
+end box
+box "Aplicação Motor Fluxo Atividades" #d3d3d3
+participant "MotorFluxoServer" as server
+participant "<<Thread>>\nHandleClient" as thread
+participant MotorFluxoParser as parser
+participant Request
+participant AvancarFluxoController 
+participant ListarTarefaService
+participant TarefaRepository
+participant Pedido
+participant PedidoRepository
+
+end box
+
+title  Avançar fluxo de atividade / Alterar Estado do Pedido
+
+
+client -> server  ++ : tcp: [55 - Tarefa Concluída]\n«"CodigoTarefa"»
+create thread
+server -> thread : HandleClient(socket)
+
+
+autoactivate on
+server -> thread : start()
+thread -> parser  : parse("CodigoTarefa")
+parser -> Request ** : Request()
+return request
+thread -> Request : execute()
+ 
+
+Request -> AvancarFluxoController  :  atualizarPedidoByTarefaConcluida(codigoTarefa)
+AvancarFluxoController -> ListarTarefaService : tarefaByIdentity(CodigoTarefa)
+ListarTarefaService -> TarefaRepository --: ofIdentity(CodigoTarefa)
+AvancarFluxoController -> AvancarFluxoController: AvancarFluxoPedido(codigoTarefa)
+AvancarFluxoController -> Pedido : atualizarEstado(EstadoPedido.APROVADO)
+deactivate Pedido
+AvancarFluxoController -> PedidoRepository --: save(pedido)
+
+
+
+
+
+return 
+return  String response
+thread -> client --: tcp: [003 - Realizado com Sucesso] «response»
+
+
+
+
+
+
+@enduml

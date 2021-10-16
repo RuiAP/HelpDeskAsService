@@ -1,0 +1,86 @@
+@startuml EspecificacaoServico
+
+
+class Script {
+
+}
+
+class Feedback {
+
+}
+
+package "Servico" <<aggregate>> #DDDDDD {
+
+    class Servico <<entity>> <<root>> {
+        CodigoUnico codigoUnico
+        Titulo Titulo
+        Icone icone
+        Descricao descricaoBreve
+        Descricao descricaoCompleta
+    }
+
+    class ListaKeywords <<value object>> {
+
+    }
+
+    class Keyword <<value object>> {
+
+    }
+
+    Servico "1" --> "1" ListaKeywords : "encontrado por"
+    ListaKeywords "1" --> "*" Keyword : "disponibiliza"
+    Servico "0..*" --> "1" Colaborador : "tem como responsável"
+    Servico "1" --> "1..*" Atividade
+    Servico "1" --> "0..1" Feedback : "Requer feedback"
+}
+
+
+   enum EstadoEspecificacao {
+
+    }
+    
+Servico "1" --> "1" EstadoEspecificacao : "encontra-se em"
+Formulario "1" --> "1" EstadoEspecificacao : "encontra-se em"
+
+package "Catalogo" <<aggregate>> #DDDDDD {
+
+    class Catalogo <<entity>> <<root>> {
+        Identificador identificador
+        Titulo Titulo
+        Icone icone
+        Descricao descricaoBreve
+        Descricao descricaoCompleta
+    }
+
+
+    Servico "1..*" o-- "1" Catalogo : "identifica"    
+    
+}
+
+
+
+package "Formulario" <<aggregate>> #DDDDDD {
+    class Formulario <<entity>> <<root>> {
+        IdentificadorUnico identificadorUnico
+        Nome nome
+    }
+
+    class AtributoFormulario <<entity>> {
+        NomeVariavel nomeVariavel
+        EtiquetaApresentacao etiquetaApresentacao
+        DescricaoAjuda descricaoAjuda
+        TipoDadosBase tipoDadosBase
+        ExpressaoRegular expressaoRegular
+        ObrigatoriedadeDePreenchimento obrigatoriedadeDePreenchimento
+    }
+
+    Formulario "1" --> "1..*" Script : "validado"
+    Formulario "1" --> "0..*" AtributoFormulario : "composto por"
+    Formulario "1" <-- "1" Servico : "especifica"
+    AtributoFormulario "1" --> "1..*" Script : "validado"
+
+}
+
+
+
+@enduml

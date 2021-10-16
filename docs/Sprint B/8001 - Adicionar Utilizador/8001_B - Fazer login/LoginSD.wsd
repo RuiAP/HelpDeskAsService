@@ -1,0 +1,16 @@
+@startuml
+
+participant Main 
+participant LoginUI 
+participant AuthzRegistry 
+participant authenticationService
+
+Main -> AuthzRegistry : configure(UserRepository, PasswordPolicy, PasswordEncoder)
+LoginUI -> AuthzRegistry : authenticationService()
+AuthzRegistry --> LoginUI : AuthenticationService authenticationService
+
+LoginUI -> authenticationService : authenticate (username, password, ROLE)
+authenticationService --> LoginUI :  <Optional> UserSession
+
+
+@enduml

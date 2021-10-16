@@ -1,0 +1,116 @@
+@startuml EspecificacaoServico
+
+class Colaborador {
+
+}
+
+
+
+class Equipa {
+
+}
+
+
+class Script {
+
+}
+
+
+
+
+package "Servico" <<aggregate>> #DDDDDD {
+
+    class Servico <<entity>> <<root>> {
+        CodigoUnico codigoUnico
+        Titulo Titulo
+        Icone icone
+        Descricao descricaoBreve
+        Descricao descricaoCompleta
+        RequerFeedback requerFeedback
+    }
+
+    class Keyword <<value object>> {
+
+    }
+
+
+    enum EntidadeDeAprovacao <<value object>> {
+        RESPONSAVELCOLABORADOR
+        RESPONSAVELCATALOGO
+    }
+    Servico "1"-->"1" EntidadeDeAprovacao
+
+    class Formulario <<value object>> {
+        IdentificadorUnico identificadorUnico
+        Nome nome
+        EstadoEspecificacao estadoEspecificacao
+    }
+
+    class AtributoFormulario <<value object>> {
+        NomeVariavel nomeVariavel
+        EtiquetaApresentacao etiquetaApresentacao
+        DescricaoAjuda descricaoAjuda
+        TipoDadosBase tipoDadosBase
+        ExpressaoRegular expressaoRegular
+        ObrigatoriedadeDePreenchimento obrigatoriedadeDePreenchimento
+    }
+
+    class Atividade <<value object>> {
+        AutorizaDelegacao autorizaDelegacao
+    }
+
+    class AtividadeManual <<value object>> {
+
+    }
+
+    class AtividadeAutomatica <<value object>> {
+
+    }
+
+    enum EstadoEspecificacao <<value object>>{
+
+    }
+
+    AtividadeManual "1" --> "1" Formulario : "especifica"
+    Atividade <|-- AtividadeManual : ""
+    Atividade <|-- AtividadeAutomatica : ""
+
+    Formulario "1" --> "0..*" AtributoFormulario : "composto por"
+    Formulario "1" <-- "1" Servico : "especifica"
+
+    Servico "1" --> "0..*" Keyword : "pesquisado por"
+    Servico "0..*" --> "1" Colaborador : "tem como responsável"
+    Servico "1" -right-> "1..*" Atividade
+
+
+    Script "1" <-- "1..*" Formulario : "validado"
+    Script "1" <-- "1..*" AtributoFormulario : "validado"
+    Script  "1" <-- "1" AtividadeAutomatica : "especifica conteudo de"
+}
+
+
+
+
+    
+Servico "1" --> "1" EstadoEspecificacao : "encontra-se em"
+
+package "Catalogo" <<aggregate>> #DDDDDD {
+
+    class Catalogo <<entity>> <<root>> {
+        Identificador identificador
+        Titulo Titulo
+        Icone icone
+        Descricao descricaoBreve
+        Descricao descricaoCompleta
+    }
+
+
+    Servico "1..*" o-- "1" Catalogo : "identifica"    
+    Catalogo "1" --> "1..*" Equipa : "permite acesso a"
+    Catalogo "1" -left-> "1" Colaborador : "tem como responsavel"
+}
+
+
+
+
+@enduml

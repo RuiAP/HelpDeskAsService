@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" contentScriptType="application/ecmascript" contentStyleType="text/css" height="168px" preserveAspectRatio="none" style="width:193px;height:168px;" version="1.1" viewBox="0 0 193 168" width="193px" zoomAndPan="magnify"><defs><filter height="300%" id="fcoutsfr3obgw" width="300%" x="-1" y="-1"><feGaussianBlur result="blurOut" stdDeviation="2.0"/><feColorMatrix in="blurOut" result="blurOut2" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 .4 0"/><feOffset dx="4.0" dy="4.0" in="blurOut2" result="blurOut3"/><feBlend in="SourceGraphic" in2="blurOut3" mode="normal"/></filter></defs><g><!--MD5=[ab5253a9f58e7de5894d107ec8cc6b2a]
+cluster Funcao--><polygon fill="#DDDDDD" filter="url(#fcoutsfr3obgw)" points="16,6,74,6,81,29.6094,176,29.6094,176,161,16,161,16,6" style="stroke:#000000;stroke-width:1.5;"/><line style="stroke:#000000;stroke-width:1.5;" x1="16" x2="81" y1="29.6094" y2="29.6094"/><text fill="#000000" font-family="sans-serif" font-size="14" font-weight="bold" lengthAdjust="spacing" textLength="52" x="20" y="22.5332">Funcao</text><text fill="#000000" font-family="sans-serif" font-size="14" font-style="italic" lengthAdjust="spacing" textLength="81" x="59.5" y="46.1426">«aggregate»</text><!--MD5=[b6491c6bfca6d442eeced1751ed765da]
+class Funcao--><rect codeLine="4" fill="#FEFECE" filter="url(#fcoutsfr3obgw)" height="85.1172" id="Funcao" style="stroke:#A80036;stroke-width:1.5;" width="128" x="32" y="60"/><ellipse cx="71.75" cy="87.6406" fill="#ADD1B2" rx="11" ry="11" style="stroke:#A80036;stroke-width:1.0;"/><path d="M74.5156,83.5156 Q74.6719,83.2969 74.8594,83.1875 Q75.0469,83.0781 75.2656,83.0781 Q75.6406,83.0781 75.875,83.3438 Q76.1094,83.5938 76.1094,84.2031 L76.1094,85.6563 Q76.1094,86.2656 75.875,86.5313 Q75.6406,86.7969 75.2656,86.7969 Q74.9219,86.7969 74.7188,86.5938 Q74.5156,86.4063 74.4063,85.8906 Q74.3594,85.5313 74.1719,85.3438 Q73.8438,84.9688 73.2344,84.75 Q72.625,84.5313 72,84.5313 Q71.2344,84.5313 70.5938,84.8594 Q69.9688,85.1875 69.4688,85.9375 Q68.9844,86.6875 68.9844,87.7188 L68.9844,88.8125 Q68.9844,90.0469 69.875,90.875 Q70.7656,91.6875 72.3594,91.6875 Q73.2969,91.6875 73.9531,91.4375 Q74.3438,91.2813 74.7656,90.8438 Q75.0313,90.5781 75.1719,90.5 Q75.3281,90.4219 75.5313,90.4219 Q75.8594,90.4219 76.1094,90.6875 Q76.375,90.9375 76.375,91.2813 Q76.375,91.625 76.0313,92.0313 Q75.5313,92.6094 74.7344,92.9375 Q73.6563,93.3906 72.3594,93.3906 Q70.8438,93.3906 69.6406,92.7656 Q68.6563,92.2656 67.9688,91.2031 Q67.2813,90.125 67.2813,88.8438 L67.2813,87.6875 Q67.2813,86.3594 67.8906,85.2188 Q68.5156,84.0625 69.6094,83.4531 Q70.7031,82.8281 71.9375,82.8281 Q72.6719,82.8281 73.3125,83 Q73.9688,83.1563 74.5156,83.5156 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="12" font-style="italic" lengthAdjust="spacing" textLength="43" x="90.25" y="77.457">«entity»</text><text fill="#000000" font-family="sans-serif" font-size="12" font-style="italic" lengthAdjust="spacing" textLength="35" x="94.25" y="92.5508">«root»</text><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="41" x="91.25" y="107.6445">Funcao</text><line style="stroke:#A80036;stroke-width:1.5;" x1="33" x2="159" y1="115.2813" y2="115.2813"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="116" x="38" y="130.7002">Designacao designacao</text><line style="stroke:#A80036;stroke-width:1.5;" x1="33" x2="159" y1="137.1172" y2="137.1172"/><!--MD5=[20329a6c0bac2cf54d54884a59f6d320]
+@startuml
+
+package "Funcao" <<aggregate>> #DDDDDD {
+
+    class Funcao <<entity>> <<root>> {
+        Designacao designacao
+    }
+
+}
+
+@enduml
+
+PlantUML version 1.2021.00(Sun Jan 10 10:25:05 WET 2021)
+(GPL source distribution)
+Java Runtime: Java(TM) SE Runtime Environment
+JVM: Java HotSpot(TM) 64-Bit Server VM
+Default Encoding: Cp1252
+Language: pt
+Country: PT
+--></g></svg>

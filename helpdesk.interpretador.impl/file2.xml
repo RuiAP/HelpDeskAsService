@@ -1,0 +1,27 @@
+<products>
+    <product id="XYJ123">
+        <name>Product One</name>
+        <description>This is the description for product one.</description>
+        <price>19.99</price>
+    </product>
+    <product id="XYJ234">
+        <name>Product Two</name>
+        <description>This is the description for product two.</description>
+        <price>29.99</price>
+    </product>
+    <product id="XYJ456">
+        <name>Product Three</name>
+        <description>This is the description for product three.</description>
+        <price>39.99</price>
+    </product>
+    <product id="XYJ789">
+        <name>Product Four</name>
+        <description>This is the description for product four.</description>
+        <price>49.99</price>
+    </product>
+    <product id="XYH123">
+        <name>Product Five</name>
+        <description>This is the description for product five.</description>
+        <price>59.99</price>
+    </product>
+</products>

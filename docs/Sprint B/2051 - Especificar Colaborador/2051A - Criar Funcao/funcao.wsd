@@ -1,0 +1,11 @@
+@startuml
+
+package "Funcao" <<aggregate>> #DDDDDD {
+
+    class Funcao <<entity>> <<root>> {
+        Designacao designacao
+    }
+
+}
+
+@enduml

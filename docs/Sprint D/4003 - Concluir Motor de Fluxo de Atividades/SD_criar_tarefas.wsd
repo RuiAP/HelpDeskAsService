@@ -1,0 +1,57 @@
+@startuml
+
+
+box "Aplicação Portal Utilizador" #LightBlue
+participant "PortalUtilizadorClient" as client 
+end box
+box "Aplicação Motor Fluxo Atividades" #d3d3d3
+participant "MotorFluxoServer" as server
+participant "<<Thread>>\nHandleClient" as thread
+participant MotorFluxoParser as parser
+participant Request
+participant CriarTarefaController 
+participant ListarPedidoService
+participant PedidoRepository
+participant "TarefaManual /\nTarefaAutomatica" as Tarefa
+participant TarefaRepository
+participant Pedido
+end box
+
+title Criação das Tarefas de um novo Pedido
+
+
+client -> server  ++ : tcp: [050-Novo Pedido Solicitado]\n«"IdentificadorPedido"»
+create thread
+server -> thread : HandleClient(socket)
+autoactivate on
+
+server -> thread : start()
+thread -> parser  : parse("identificadorPedido")
+parser -> Request ** : Request()
+return request
+thread -> Request : execute()
+ 
+Request -> CriarTarefaController  :  criarTarefasDoPedido(identificadorPedido)
+CriarTarefaController -> CriarTarefaController : getPedido(identificadorPedido)
+CriarTarefaController -> ListarPedidoService: getPedidoById(identificadorPedido)
+ListarPedidoService -> PedidoRepository -- : ofIdentity(IdentificadorPedido)
+deactivate CriarTarefaController
+CriarTarefaController -> CriarTarefaController : criarTarefasByPedido(pedido)
+CriarTarefaController -> CriarTarefaController : criarTarefaByAtividade(atividade)
+
+loop tarefas do pedido
+CriarTarefaController -> Tarefa **: TarefaManual(...) 
+CriarTarefaController -> TarefaRepository -- : save(tarefa)
+end
+CriarTarefaController -> Pedido  : actualizaEstado(EstadoPedido.AGUARDA_AUTORIZACAO)
+deactivate Pedido
+return 
+return  String response
+thread -> client --: tcp: [003 - Realizado com Sucesso] «response»
+
+
+
+
+
+
+@enduml
